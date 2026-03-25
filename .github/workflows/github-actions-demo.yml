@@ -29,6 +29,7 @@ jobs:
       - name: Upload coverage information as an artifact
         uses: actions/upload-artifact@v4
         with:
+          include-hidden-files: true
           name: .coverage
   coverage_report:
     runs-on: ubuntu-latest
