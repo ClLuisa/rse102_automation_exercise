@@ -30,7 +30,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
-          name: .coverage
+          name: coverage
+          path: .coverage
   coverage_report:
     runs-on: ubuntu-latest
     needs: test
