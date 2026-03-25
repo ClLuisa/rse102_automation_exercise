@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Example Actions
+run-name: $Testing out GitHub Actions
 on: [push]
 jobs:
   style_check:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: pip install pytest coverage numpy
+        run: pip install pytest coverage numpy matplotlib
 
       - name: Run tests and collect coverage information
         run: |
