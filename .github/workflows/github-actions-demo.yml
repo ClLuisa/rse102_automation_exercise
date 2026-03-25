@@ -37,9 +37,9 @@ jobs:
     needs: test
     steps:
       - name: Download coverage information artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: coverage-data
+          name: coverage
 
       - name: Generate coverage report and XML file
         run: |
@@ -47,7 +47,7 @@ jobs:
           coverage xml -o coverage.xml
 
       - name: Upload coverage XML as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-xml
         
