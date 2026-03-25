@@ -1,1 +1,51 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  style_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: pip install black
+      - name: Run check
+        run: black --check .
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pip install pytest coverage
+
+      - name: Run tests and collect coverage information
+        run: |
+          coverage run -m pytest
+          coverage report
+
+      - name: Upload coverage information as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-data
+  coverage_report:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Download coverage information artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage-data
+
+      - name: Generate coverage report and XML file
+        run: |
+          coverage report
+          coverage xml -o coverage.xml
+
+      - name: Upload coverage XML as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-xml
+        
