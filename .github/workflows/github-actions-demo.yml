@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
-          name: coverage
+          name: coverage-data
           path: .coverage
   coverage_report:
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
       - name: Download coverage information artifact
         uses: actions/download-artifact@v4
         with:
-          name: coverage
+          name: coverage-data
 
       - name: Generate coverage report and XML file
         run: |
@@ -50,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-xml
-        
+          path: coverage.xml
